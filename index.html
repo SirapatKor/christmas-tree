@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merry Christmas 🎄</title>
+  <style>
+    :root {
+      --gold: #ffd66b;
+      --red: #e94b59;
+      --green: #0d754e
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: Georgia, serif;
+      color: #fff;
+      background: radial-gradient(ellipse at 50% 75%, #173b53 0, #0b2039 45%, #050d20 100%);
+      display: grid;
+      place-items: center
+    }
+
+    .intro-draw {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(ellipse at center, #102b43 0, #071426 70%);
+      animation: drawOverlayOut 1.2s ease 5.1s forwards;
+      pointer-events: none
+    }
+
+    .intro-draw svg {
+      width: min(78vw, 520px);
+      height: min(82vh, 570px);
+      overflow: visible
+    }
+
+    .draw-line {
+      fill: none;
+      stroke: url(#beam);
+      stroke-width: 3.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: url(#beamGlow);
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      animation: trace 1.15s ease-in-out forwards
+    }
+
+    .draw-line:nth-of-type(2) {
+      animation-delay: .35s
+    }
+
+    .draw-line:nth-of-type(3) {
+      animation-delay: 1.05s
+    }
+
+    .draw-line:nth-of-type(4) {
+      animation-delay: 1.75s
+    }
+
+    .draw-line:nth-of-type(5) {
+      animation-delay: 2.45s;
+      stroke: #8affd9;
+      stroke-width: 2.5
+    }
+
+    .draw-line.star-line {
+      stroke: #fff1a8;
+      stroke-width: 3.5;
+      animation-delay: 3.35s
+    }
+
+    .draw-line.trunk-line {
+      stroke: #ffe1a0;
+      animation-delay: 4.05s;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200
+    }
+
+    @keyframes trace {
+      to {
+        stroke-dashoffset: 0
+      }
+    }
+
+    @keyframes drawOverlayOut {
+      to {
+        opacity: 0;
+        visibility: hidden
+      }
+    }
+
+    .scene {
+      opacity: 0;
+      animation: sceneReveal 1.1s ease 4.65s forwards
+    }
+
+    @keyframes sceneReveal {
+      to {
+        opacity: 1
+      }
+    }
+
+    .sky-glow {
+      position: absolute;
+      width: 70vmin;
+      height: 70vmin;
+      border-radius: 50%;
+      background: #2c6380;
+      filter: blur(100px);
+      opacity: .18;
+      top: 10%;
+      left: 15%
+    }
+
+    .scene {
+      position: relative;
+      width: min(900px, 100vw);
+      height: min(780px, 100vh);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 25px
+    }
+
+    h1 {
+      z-index: 3;
+      margin: 0 0 2px;
+      font-size: clamp(2.3rem, 7vw, 5rem);
+      letter-spacing: .05em;
+      color: #ffe7a2;
+      text-shadow: 0 0 10px #ffc95c, 0 0 28px #e99b36;
+      animation: titleGlow 2.4s ease-in-out infinite alternate
+    }
+
+    .subtitle {
+      z-index: 3;
+      color: #d8eaf4;
+      font: italic clamp(.9rem, 2vw, 1.2rem) Georgia;
+      letter-spacing: .18em;
+      margin-bottom: 12px
+    }
+
+    .tree-wrap {
+      position: relative;
+      width: min(440px, 82vw);
+      height: min(510px, 62vh);
+      min-height: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end
+    }
+
+    .tree {
+      position: absolute;
+      bottom: 42px;
+      width: 100%;
+      height: 94%;
+      filter: drop-shadow(0 12px 16px #0008)
+    }
+
+    .layer {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: var(--w) solid transparent;
+      border-right: var(--w) solid transparent;
+      border-bottom: var(--h) solid var(--c);
+      filter: drop-shadow(0 5px 2px #031a15)
+    }
+
+    .l1 {
+      --w: 75px;
+      --h: 125px;
+      --c: #16875c;
+      top: 5%;
+      z-index: 4
+    }
+
+    .l2 {
+      --w: 125px;
+      --h: 160px;
+      --c: #10744e;
+      top: 22%;
+      z-index: 3
+    }
+
+    .l3 {
+      --w: 175px;
+      --h: 190px;
+      --c: #0c6244;
+      top: 40%;
+      z-index: 2
+    }
+
+    .l4 {
+      --w: 220px;
+      --h: 205px;
+      --c: #084e39;
+      top: 58%;
+      z-index: 1
+    }
+
+    .trunk {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 76px;
+      background: linear-gradient(90deg, #59351e, #9a6035, #4b2b1a);
+      border-radius: 4px;
+      z-index: 0
+    }
+
+    .star {
+      position: absolute;
+      top: -2%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 55px;
+      color: #ffe48a;
+      text-shadow: 0 0 8px #fff, 0 0 25px #ffc34e;
+      z-index: 6;
+      animation: starPulse 1.7s infinite alternate
+    }
+
+    .garland {
+      position: absolute;
+      left: 50%;
+      height: 75%;
+      width: 75%;
+      top: 16%;
+      transform: translateX(-50%);
+      z-index: 5;
+      pointer-events: none
+    }
+
+    .garland svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible
+    }
+
+    .garland path {
+      fill: none;
+      stroke: #e8bd69;
+      stroke-width: 2.5;
+      stroke-dasharray: 4 5;
+      opacity: .85
+    }
+
+    .bulb {
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      z-index: 7;
+      box-shadow: 0 0 9px currentColor, 0 0 18px currentColor;
+      animation: twinkle 1.4s infinite alternate
+    }
+
+    .ornament {
+      position: absolute;
+      z-index: 8;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      box-shadow: inset -4px -4px 5px #0005, 0 0 10px currentColor
+    }
+
+    .gifts {
+      position: absolute;
+      bottom: 3px;
+      display: flex;
+      gap: 14px;
+      align-items: end;
+      z-index: 9
+    }
+
+    .gift {
+      position: relative;
+      width: 72px;
+      height: 58px;
+      background: #b72e43;
+      border-radius: 3px;
+      box-shadow: 0 8px 12px #0005;
+      animation: bob 3s ease-in-out infinite
+    }
+
+    .gift:before {
+      content: "";
+      position: absolute;
+      left: 29px;
+      top: 0;
+      width: 14px;
+      height: 100%;
+      background: #f7d16f
+    }
+
+    .gift:after {
+      content: "";
+      position: absolute;
+      left: 20px;
+      top: -13px;
+      width: 32px;
+      height: 16px;
+      border: 5px solid #f7d16f;
+      border-radius: 50% 50% 0 50%;
+      transform: rotate(12deg)
+    }
+
+    .gift:nth-child(2) {
+      width: 86px;
+      height: 72px;
+      background: #176b59;
+      animation-delay: .7s
+    }
+
+    .gift:nth-child(2):before,
+    .gift:nth-child(2):after {
+      background: #e9a7ae;
+      border-color: #e9a7ae
+    }
+
+    .gift:nth-child(3) {
+      width: 58px;
+      height: 48px;
+      background: #d39a37;
+      animation-delay: 1.2s
+    }
+
+    .gift:nth-child(3):before,
+    .gift:nth-child(3):after {
+      background: #fff0b8;
+      border-color: #fff0b8
+    }
+
+    .ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 85px;
+      background: linear-gradient(#e8f5fa, #b8d6e5);
+      border-radius: 50% 50% 0 0;
+      box-shadow: 0 -8px 35px #dff5ff55
+    }
+
+    .ground:before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 15%;
+      width: 70%;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      filter: blur(8px)
+    }
+
+    .controls {
+      z-index: 10;
+      display: flex;
+      gap: 12px;
+      margin-top: 18px
+    }
+
+    button {
+      border: 1px solid #ffe4a0;
+      background: #ffffff12;
+      color: #ffe9b4;
+      padding: 11px 19px;
+      border-radius: 30px;
+      font-size: .9rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: .25s
+    }
+
+    button:hover {
+      background: #ffe4a0;
+      color: #1a2a38;
+      transform: translateY(-2px)
+    }
+
+    .snow {
+      position: absolute;
+      top: -15px;
+      width: 5px;
+      height: 5px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: .8;
+      animation: fall linear infinite;
+      pointer-events: none
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font: 12px Arial, sans-serif;
+      letter-spacing: .12em;
+      color: #b8d0df;
+      z-index: 10
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) translateX(35px);
+        opacity: .2
+      }
+    }
+
+    @keyframes twinkle {
+      from {
+        opacity: .35;
+        transform: scale(.75)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1.25)
+      }
+    }
+
+    @keyframes starPulse {
+      from {
+        filter: brightness(.8);
+        transform: translateX(-50%) scale(.9)
+      }
+
+      to {
+        filter: brightness(1.5);
+        transform: translateX(-50%) scale(1.12)
+      }
+    }
+
+    @keyframes titleGlow {
+      from {
+        text-shadow: 0 0 8px #ffc95c, 0 0 18px #e99b36
+      }
+
+      to {
+        text-shadow: 0 0 18px #fff0ae, 0 0 38px #ffb52e
+      }
+    }
+
+    @keyframes bob {
+      50% {
+        transform: translateY(-5px)
+      }
+    }
+
+    .lights-off .bulb {
+      opacity: .12;
+      box-shadow: none
+    }
+
+    .lights-off .star {
+      filter: brightness(.55)
+    }
+
+    @media(max-height:650px) {
+      .scene {
+        transform: scale(.82)
+      }
+
+      footer {
+        bottom: 5px
+      }
+    }
+
+    .card-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: #020916c9;
+      backdrop-filter: blur(9px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .35s, visibility .35s
+    }
+
+    .card-backdrop.open {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .wish-card {
+      position: relative;
+      width: min(470px, 94vw);
+      max-height: 90vh;
+      overflow: auto;
+      padding: 32px 30px 25px;
+      text-align: center;
+      color: #5a3440;
+      background: linear-gradient(145deg, #fffdf5, #f8e8dc);
+      border: 1px solid #f5d99c;
+      border-radius: 8px;
+      box-shadow: 0 18px 70px #0009, 0 0 0 7px #fff1;
+      transform: translateY(20px) scale(.97);
+      transition: transform .4s
+    }
+
+    .card-backdrop.open .wish-card {
+      transform: translateY(0) scale(1)
+    }
+
+    .wish-card:before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 1px solid #d9b77c;
+      pointer-events: none
+    }
+
+    .card-close {
+      position: absolute;
+      right: 17px;
+      top: 14px;
+      border: 0;
+      background: transparent;
+      color: #80545a;
+      font: 28px Arial;
+      padding: 2px 8px;
+      z-index: 2
+    }
+
+    .card-sparkle {
+      color: #c59a4c;
+      font-size: 23px;
+      letter-spacing: .3em;
+      margin: 4px 0 13px
+    }
+
+    .card-kicker {
+      font: 10px Arial, sans-serif;
+      letter-spacing: .22em;
+      color: #a47a55
+    }
+
+    .wish-card h2 {
+      font-size: clamp(2rem, 7vw, 2.8rem);
+      font-weight: normal;
+      color: #a82f45;
+      margin: 12px 0 7px;
+      text-shadow: 0 1px #fff
+    }
+
+    .to-line {
+      font-size: 1.15rem;
+      margin: 8px 0;
+      color: #8b5a53
+    }
+
+    #recipientPreview {
+      font-weight: bold;
+      color: #b23d50
+    }
+
+    .card-divider {
+      color: #c79a52;
+      font-size: 24px;
+      margin: 12px
+    }
+
+    .wish-message {
+      white-space: pre-line;
+      line-height: 1.9;
+      font-size: 1rem;
+      margin: 12px auto 22px;
+      max-width: 340px;
+      color: #67464a
+    }
+
+    .wish-message strong {
+      color: #a6384b;
+      font-weight: normal
+    }
+
+    .card-bottom {
+      font: 9px Arial, sans-serif;
+      letter-spacing: .2em;
+      color: #a47a55
+    }
+
+    .card-bottom span {
+      color: #bd4654
+    }
+
+    .edit-area {
+      position: relative;
+      z-index: 1;
+      text-align: left;
+      border-top: 1px solid #e6d1b7;
+      margin-top: 20px;
+      padding-top: 15px;
+      display: grid;
+      gap: 7px
+    }
+
+    .edit-area label {
+      font: 11px Arial, sans-serif;
+      letter-spacing: .06em;
+      color: #805d55;
+      margin-top: 4px
+    }
+
+    .edit-area input,
+    .edit-area textarea {
+      width: 100%;
+      border: 1px solid #ddc6ad;
+      border-radius: 7px;
+      background: #fffaf4;
+      padding: 10px;
+      color: #5a3440;
+      font: 14px Arial, sans-serif;
+      resize: vertical
+    }
+
+    .edit-area #saveWishBtn {
+      margin-top: 5px;
+      background: #9e3448;
+      color: #fff;
+      border: 0;
+      border-radius: 24px;
+      padding: 11px;
+      cursor: pointer
+    }
+
+    @media(max-width:420px) {
+      .wish-card {
+        padding: 28px 20px 20px
+      }
+
+      .wish-message {
+        font-size: .94rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sky-glow"></div>
+  <div class="intro-draw" id="introDraw" aria-hidden="true">
+    <svg viewBox="0 0 500 560" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="beam" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="#53f5ce" />
+          <stop offset=".55" stop-color="#fff2a6" />
+          <stop offset="1" stop-color="#fff" />
+        </linearGradient>
+        <filter id="beamGlow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <path class="draw-line trunk-line" d="M250 492 L250 430" />
+      <path class="draw-line" d="M250 70 L170 190 L330 190 Z" />
+      <path class="draw-line" d="M250 155 L115 320 L385 320 Z" />
+      <path class="draw-line" d="M250 245 L55 455 L445 455 Z" />
+      <path class="draw-line spiral"
+        d="M250 92 C330 125 330 160 250 190 C145 230 140 275 250 305 C365 340 365 380 250 410 C165 435 160 450 250 465" />
+      <path class="draw-line star-line"
+        d="M250 25 L260 51 L288 53 L267 71 L273 99 L250 84 L227 99 L233 71 L212 53 L240 51 Z" />
+    </svg>
+  </div>
+  <main class="scene" id="scene">
+    <h1>Merry Christmas</h1>
+    <div class="subtitle">ขอให้คุณมีความสุขและความมหัศจรรย์</div>
+    <div class="tree-wrap">
+      <div class="ground"></div>
+      <div class="tree">
+        <div class="star">★</div>
+        <div class="layer l1"></div>
+        <div class="layer l2"></div>
+        <div class="layer l3"></div>
+        <div class="layer l4"></div>
+        <div class="garland"><svg viewBox="0 0 400 440" preserveAspectRatio="none">
+            <path d="M145 35 C70 95 330 120 105 190 S340 265 55 340 S300 390 45 430" />
+          </svg></div>
+        <div class="trunk"></div>
+        <div class="gifts">
+          <div class="gift"></div>
+          <div class="gift"></div>
+          <div class="gift"></div>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="lightsBtn">✨ Turn lights off</button>
+      <button id="snowBtn">❄ Pause snow</button>
+      <button id="openCardBtn">💌 Open your card</button>
+    </div>
+    <footer>สร้างสรรค์ด้วยความรัก · มนต์เสน่ห์แห่งเดือนธันวาคม</footer>
+  </main>
+
+  <div class="card-backdrop" id="cardBackdrop" aria-hidden="true">
+    <section class="wish-card" role="dialog" aria-modal="true" aria-labelledby="cardTitle">
+      <button class="card-close" id="closeCardBtn" aria-label="Close">×</button>
+      <div class="card-sparkle">✦　❄　✦</div>
+      <div class="card-kicker">ข้อความคริสต์มาสเล็ก ๆ สำหรับคุณ</div>
+      <h2 id="cardTitle">ข้อความคริสต์มาสสำหรับคุณ</h2>
+      <div class="card-divider">❦</div>
+      <p class="wish-message" id="wishPreview">ขอให้คริสต์มาสปีนี้เต็มไปด้วยรอยยิ้ม ความสุข และเรื่องราวดี ๆ นะ<br>ขอให้ทุกวันที่กำลังจะมาถึงใจดีกับพี่เกียเสมอ<br><strong>ขอบคุณที่เป็นความสุขเล็ก ๆ ในปีนี้นะ</strong></p>
+      <div class="card-bottom">WITH LOVE, THIS CHRISTMAS <span>♥</span></div>
+    </section>
+  </div>
+  <script>
+    const scene = document.getElementById('scene');
+    const colors = ['#ff5d65', '#ffd65a', '#69e5ff', '#f5a6ff', '#fff'];
+    // Decorate the tree with glowing bulbs and ornaments.
+    const positions = [
+      [48, 17], [38, 28], [58, 30], [27, 42], [48, 43], [70, 44],
+      [18, 57], [36, 58], [57, 59], [78, 59], [29, 73], [49, 73], [68, 74], [85, 74],
+      [42, 86], [60, 87]
+    ];
+    positions.forEach(([x, y], i) => {
+      const bulb = document.createElement('i'); bulb.className = 'bulb';
+      bulb.style.left = x + '%'; bulb.style.top = y + '%'; bulb.style.color = colors[i % colors.length];
+      bulb.style.background = colors[i % colors.length]; bulb.style.animationDelay = (i * .19) + 's';
+      scene.querySelector('.tree').appendChild(bulb);
+    });
+    const ornaments = [[31, 34, '#df4556'], [65, 36, '#e7bd55'], [20, 53, '#5ed5ed'], [76, 53, '#df4556'], [39, 67, '#d5a5ff'], [61, 69, '#e7bd55'], [51, 81, '#df4556']];
+    ornaments.forEach(([x, y, c]) => { const o = document.createElement('i'); o.className = 'ornament'; o.style.left = x + '%'; o.style.top = y + '%'; o.style.background = c; o.style.color = c; scene.querySelector('.tree').appendChild(o) });
+    let snowing = true;
+    for (let i = 0; i < 95; i++) {
+      const s = document.createElement('i'); s.className = 'snow'; s.style.left = Math.random() * 100 + 'vw';
+      s.style.opacity = .25 + Math.random() * .7; s.style.width = s.style.height = (2 + Math.random() * 4) + 'px';
+      s.style.animationDuration = (7 + Math.random() * 13) + 's'; s.style.animationDelay = (-Math.random() * 18) + 's';
+      document.body.appendChild(s);
+    }
+    document.getElementById('lightsBtn').addEventListener('click', e => {
+      scene.classList.toggle('lights-off');
+      e.currentTarget.textContent = scene.classList.contains('lights-off') ? '✨ Turn lights on' : '✨ Turn lights off';
+    });
+    document.getElementById('snowBtn').addEventListener('click', e => {
+      snowing = !snowing; document.querySelectorAll('.snow').forEach(s => s.style.animationPlayState = snowing ? 'running' : 'paused');
+      e.currentTarget.textContent = snowing ? '❄ Pause snow' : '❄ Resume snow';
+    });
+    const backdrop = document.getElementById('cardBackdrop');
+    const recipientInput = document.getElementById('recipientInput');
+    const messageInput = document.getElementById('messageInput');
+    function closeCard() { backdrop.classList.remove('open'); backdrop.setAttribute('aria-hidden', 'true') }
+    document.getElementById('openCardBtn').addEventListener('click', () => {
+      backdrop.classList.add('open'); backdrop.setAttribute('aria-hidden', 'false');
+    });
+    document.getElementById('closeCardBtn').addEventListener('click', closeCard);
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeCard() });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCard() });
+    document.getElementById('saveWishBtn').addEventListener('click', () => {
+      document.getElementById('recipientPreview').textContent = recipientInput.value.trim() || 'คนพิเศษ';
+      document.getElementById('wishPreview').textContent = messageInput.value.trim() || 'ขอให้มีความสุขมาก ๆ ในวันคริสต์มาสนะ';
+    });
+  </script>
+</body>
+
+</html>
